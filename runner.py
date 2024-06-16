@@ -78,7 +78,6 @@ def main():
         embeddings = model.get_trained_encoder()(data).cpu().numpy()
         labels = data.y.cpu().numpy()
     print("Graph embeddings created")
-    print_memory_usage()
 
     X_train, X_test, y_train, y_test = train_test_split(embeddings, labels, test_size=0.2, random_state=42)
 
