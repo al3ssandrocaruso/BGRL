@@ -2,7 +2,7 @@
 hidden_dim_encoder = 512
 g_embedding_dim = 256
 hidden_dim_predictor = 512
-num_epochs = 100
+num_epochs = 300
 early_stop_max = 50
 pf_view_1 = 0.3
 pf_view_2 = 0.2
