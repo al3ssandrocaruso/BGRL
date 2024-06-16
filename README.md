@@ -5,8 +5,8 @@ This project provides an implementation of the [Bootstrapped Graph Latents (BGRL
 
 1. **Clone the repository**:
     ```sh
-    git clone https://github.com/your-username/graph-representation-learning.git
-    cd graph-representation-learning
+    git clone https://github.com/al3ssandrocaruso/BGRL.git
+    cd BGRL
     ```
 
 2. **Install dependencies**:
