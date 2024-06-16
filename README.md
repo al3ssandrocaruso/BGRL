@@ -51,8 +51,8 @@ This project provides an implementation of the [Bootstrapped Graph Latents (BGRL
 - `--dataset`: Dataset to use (default: Coauthor_CS)
 - `--optimizer`: Optimizer to use (`adam` or `sgd`, default: `adam`)
 - `--lr`: Learning rate (default: 1e-5)
-- `--batch_norm`: Use batch normalization (default: False)
-- `--layer_norm`: Use layer normalization (default: False)
+- `--use_batch_norm`: Use batch normalization (default: False)
+- `--use_layer_norm`: Use layer normalization (default: False)
 - `--save_weights`: Save the model weights after training (default: False)
 
 Example:

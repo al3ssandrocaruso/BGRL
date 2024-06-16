@@ -9,8 +9,8 @@ pf_view_2 = 0.2
 pe_view_1 = 0.3
 pe_view_2 = 0.4
 lr = 1e-5
-batch_norm = False
-layer_norm = False
+use_batch_norm = False
+use_layer_norm = False
 save_weights = False
 optimizer = 'adam'
 

@@ -28,8 +28,8 @@ def parse_args():
     parser.add_argument('--dataset', type=str, choices=default_args.datasets, default=default_args.default_dataset, help='Dataset to use (default: Coauthor_CS)')
     parser.add_argument('--optimizer', type=str, choices=['adam', 'sgd'], default=default_args.optimizer, help='Optimizer to use (default: adam)')
     parser.add_argument('--lr', type=float, default=default_args.lr, help='Learning Rate (default: 1e-5)')
-    parser.add_argument('--batch_norm', action='store_true', default=default_args.batch_norm, help='Use Batch Normalization (default: False)')
-    parser.add_argument('--layer_norm', action='store_true', default=default_args.layer_norm, help='Use Layer Normalization (default: False)')
+    parser.add_argument('--use_batch_norm', action='store_true', default=default_args.use_batch_norm, help='Use Batch Normalization (default: False)')
+    parser.add_argument('--use_layer_norm', action='store_true', default=default_args.use_layer_norm, help='Use Layer Normalization (default: False)')
     parser.add_argument('--save_weights', action='store_true',default=default_args.save_weights, help='Save the model weights after training (default: False)')
     return parser.parse_args()
 
@@ -42,7 +42,7 @@ def main():
     data = load_dataset(args.dataset).to(device)
     input_dim = data.x.size(1)
 
-    gnn_encoder = GCN_Encoder(input_dim, args.hidden_dim_encoder, args.g_embedding_dim, args.batch_norm, args.layer_norm)
+    gnn_encoder = GCN_Encoder(input_dim, args.hidden_dim_encoder, args.g_embedding_dim, args.use_batch_norm, args.use_layer_norm)
     predictor = LinearPredictor(args.g_embedding_dim, args.hidden_dim_predictor, args.g_embedding_dim)
     model = BGRL(gnn_encoder, predictor).to(device)
 
