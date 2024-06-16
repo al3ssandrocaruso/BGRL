@@ -29,8 +29,8 @@ def parse_args():
     parser.add_argument('--optimizer', type=str, choices=['adam', 'sgd'], default=default_args.optimizer, help='Optimizer to use (default: adam)')
     parser.add_argument('--encoder_type', type=str, choices=['GCN', 'GAT', 'MPNN'], default=default_args.encoder_type, help='GNN Architecture (default: GCN)')
     parser.add_argument('--lr', type=float, default=default_args.lr, help='Learning Rate (default: 1e-5)')
-    parser.add_argument('--batch_norm', action='store_true', default=default_args.batch_norm, help='Use Batch Normalization (default: False)')
-    parser.add_argument('--layer_norm', action='store_true', default=default_args.layer_norm, help='Use Layer Normalization (default: False)')
+    parser.add_argument('--batch_norm', default=default_args.batch_norm, help='Use Batch Normalization (default: False)')
+    parser.add_argument('--layer_norm', default=default_args.layer_norm, help='Use Layer Normalization (default: False)')
 
     return parser.parse_args()
 
@@ -50,6 +50,7 @@ def main():
     optimizer = optim.AdamW(model.parameters(), lr=args.lr) if args.optimizer == 'adam' else optim.SGD(model.parameters(), lr=args.lr)
     loss_fn = CosineSimilarityLoss()
 
+    # Model Training
     model.train()
     for epoch in tqdm(range(args.num_epochs), desc="Training Epochs"):
         optimizer.zero_grad()
@@ -69,17 +70,17 @@ def main():
             print(f"Epoch {epoch + 1}/{args.num_epochs}, Loss: {loss.item()}")
             print_memory_usage()
 
+    # Model Evaluation
     model.eval()
     with torch.no_grad():
         embeddings = model.get_trained_encoder()(data).cpu().numpy()
         labels = data.y.cpu().numpy()
-
     print("Graph embeddings created")
     print_memory_usage()
 
     X_train, X_test, y_train, y_test = train_test_split(embeddings, labels, test_size=0.2, random_state=42)
 
-    param_grid = {'C': [1], 'solver': ['liblinear']}
+    param_grid = {'C': [1e-5, 1e-4, 1e-3, 0.1, 1, 10, 100, 1000, 10000], 'solver': ['liblinear']}
     log_reg = LogisticRegression(penalty='l2')
     cross_validation = ShuffleSplit(n_splits=5, test_size=0.5, random_state=42)
     grid_search = GridSearchCV(log_reg, param_grid, cv=cross_validation, scoring='accuracy', n_jobs=-1)

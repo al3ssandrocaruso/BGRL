@@ -16,4 +16,4 @@ encoder_type = 'GCN'
 
 # Available datasets
 datasets = ['WikiCS', 'Amazon_Computers', 'Amazon_Photos', 'Coauthor_CS', 'Cora']
-default_dataset = 'WikiCS'
+default_dataset = 'Amazon_Photos'

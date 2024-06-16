@@ -25,7 +25,7 @@ This project provides an implementation of the [Bootstrapped Graph Latents (BGRL
 
 ### Running the Script
 
-1. **With Default Dataset (Coauthor_CS)**:
+1. **With Default Dataset (Amazon_Photos)**:
     Simply run:
     ```sh
     python runner.py
