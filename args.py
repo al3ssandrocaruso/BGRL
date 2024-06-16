@@ -16,5 +16,5 @@ optimizer = 'adam'
 
 
 # Available datasets
-datasets = ['WikiCS', 'Amazon_Computers', 'Amazon_Photos', 'Coauthor_CS', 'Cora']
+datasets = ['WikiCS', 'Amazon_Computers', 'Amazon_Photos', 'Coauthor_CS', 'Cora','Coauthor_Physics']
 default_dataset = 'Amazon_Photos'

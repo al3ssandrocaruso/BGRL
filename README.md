@@ -22,6 +22,7 @@ This project provides an implementation of the [Bootstrapped Graph Latents (BGRL
 - Amazon Computers
 - Amazon Photos
 - Coauthor CS
+- Coauthor Physics
 - Cora
 
 ### Running the Script

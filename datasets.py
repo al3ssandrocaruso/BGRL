@@ -8,7 +8,7 @@ def load_dataset(name):
 
     Parameters:
     - name (str): Name of the dataset to load. Must be one of the following:
-        'Amazon_Computers', 'Amazon_Photos', 'Coauthor_CS', 'Cora', 'CiteSeer',
+        'Amazon_Computers', 'Amazon_Photos', 'Coauthor_CS', 'Coauthor_Physics', 'Cora', 'CiteSeer',
         'PubMed', 'DBLP', 'WikiCS'.
 
     Returns:
@@ -22,6 +22,7 @@ def load_dataset(name):
         'Amazon_Computers': (Amazon, 'computers'),
         'Amazon_Photos': (Amazon, 'photo'),
         'Coauthor_CS': (Coauthor, 'CS'),
+        'Coauthor_Physics': (Coauthor, 'Physics'),
         'Cora': (CitationFull, 'Cora'),
         'WikiCS': (WikiCS, None)
     }
