@@ -1,6 +1,6 @@
 ## Large-Scale Representation Learning on Graphs via BootStrapping
 
-This project provides an implementation of the [Bootstrapped Graph Latents (BGRL)](https://arxiv.org/pdf/2102.06514) model, a graph representation learning method that learns by predicting alternative augmentations of the input. It utilizes various graph neural network encoders and an MLP predictor for generating node embeddings and performing classification task.
+This project provides an implementation of the [Bootstrapped Graph Latents (BGRL)](https://arxiv.org/pdf/2102.06514) model, a graph representation learning method that learns by predicting alternative augmentations of the input. It utilizes various graph neural network encoders and an MLP predictor for generating node embeddings and performing classification task on top of these embeddings.
 ### Setup
 
 1. **Clone the repository**:
