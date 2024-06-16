@@ -4,15 +4,15 @@ from torch import optim
 from tqdm import tqdm
 from sklearn.model_selection import train_test_split, GridSearchCV, ShuffleSplit
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, f1_score
-
+from sklearn.metrics import accuracy_score
 from datasets import load_dataset
 from models.loss import CosineSimilarityLoss
 from models.encoder import GNNEncoder
 from models.model import BGRL
 from models.linearpredictor import LinearPredictor
-from utils import augment_graph
+from utils import augment_graph, print_memory_usage
 import args as default_args
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train and evaluate a BGRL model.')
@@ -67,6 +67,7 @@ def main():
 
         if (epoch + 1) % 10 == 0:
             print(f"Epoch {epoch + 1}/{args.num_epochs}, Loss: {loss.item()}")
+            print_memory_usage()
 
     model.eval()
     with torch.no_grad():
@@ -74,10 +75,11 @@ def main():
         labels = data.y.cpu().numpy()
 
     print("Graph embeddings created")
+    print_memory_usage()
 
     X_train, X_test, y_train, y_test = train_test_split(embeddings, labels, test_size=0.2, random_state=42)
 
-    param_grid = {'C': [1e-5, 1e-4, 1e-3, 0.1, 1, 10, 100, 1000, 10000], 'solver': ['liblinear']}
+    param_grid = {'C': [1], 'solver': ['liblinear']}
     log_reg = LogisticRegression(penalty='l2')
     cross_validation = ShuffleSplit(n_splits=5, test_size=0.5, random_state=42)
     grid_search = GridSearchCV(log_reg, param_grid, cv=cross_validation, scoring='accuracy', n_jobs=-1)

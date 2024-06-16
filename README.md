@@ -22,13 +22,10 @@ This project provides an implementation of the [Bootstrapped Graph Latents (BGRL
 - Amazon Photos
 - Coauthor CS
 - Cora
-- CiteSeer
-- PubMed
-- DBLP
 
 ### Running the Script
 
-1. **With Default Dataset (Cora)**:
+1. **With Default Dataset (Coauthor_CS)**:
     Simply run:
     ```sh
     python runner.py
@@ -60,4 +57,4 @@ This project provides an implementation of the [Bootstrapped Graph Latents (BGRL
 
 Example:
 ```sh
-python main.py --num_epochs 200 --early_stop_max 100 --dataset PubMed
+python main.py --num_epochs 200 --early_stop_max 100 --dataset WikiCS
