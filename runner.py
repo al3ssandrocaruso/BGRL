@@ -66,9 +66,11 @@ def main():
         optimizer.step()
         model.exp_moving_avg()
 
+        if epoch == 0:
+            print_memory_usage()
+
         if (epoch + 1) % 10 == 0:
             print(f"Epoch {epoch + 1}/{args.num_epochs}, Loss: {loss.item()}")
-            print_memory_usage()
 
     # Model Evaluation
     model.eval()
@@ -81,7 +83,7 @@ def main():
     X_train, X_test, y_train, y_test = train_test_split(embeddings, labels, test_size=0.2, random_state=42)
 
     param_grid = {'C': [1e-5, 1e-4, 1e-3, 0.1, 1, 10, 100, 1000, 10000], 'solver': ['liblinear']}
-    log_reg = LogisticRegression(penalty='l2')
+    log_reg = LogisticRegression(penalty='l2', max_iter=10000)
     cross_validation = ShuffleSplit(n_splits=5, test_size=0.5, random_state=42)
     grid_search = GridSearchCV(log_reg, param_grid, cv=cross_validation, scoring='accuracy', n_jobs=-1)
     grid_search.fit(X_train, y_train)
