@@ -23,9 +23,6 @@ def load_dataset(name):
         'Amazon_Photos': (Amazon, 'photo'),
         'Coauthor_CS': (Coauthor, 'CS'),
         'Cora': (CitationFull, 'Cora'),
-        'CiteSeer': (CitationFull, 'CiteSeer'),
-        'PubMed': (CitationFull, 'PubMed'),
-        'DBLP': (CitationFull, 'DBLP'),
         'WikiCS': (WikiCS, None)
     }
 

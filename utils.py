@@ -31,10 +31,10 @@ def augment_graph(data, pf, pe):
 
 def print_memory_usage():
     """
-        Print the current memory usage of the process in gigabytes (GB).
-        Usage:
-        Call this function to print the current memory usage in gigabytes (GB).
-        """
+    Print the current memory usage of the process in gigabytes (GB).
+    Usage:
+    Call this function to print the current memory usage in gigabytes (GB).
+    """
     process = psutil.Process(os.getpid())
     memory_info = process.memory_info()
     print(f"Current memory usage: {memory_info.rss / (1024 ** 2)} MB")
