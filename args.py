@@ -11,8 +11,9 @@ pe_view_2 = 0.4
 lr = 1e-5
 batch_norm = False
 layer_norm = False
+save_weights = False
 optimizer = 'adam'
-encoder_type = 'GCN'
+
 
 # Available datasets
 datasets = ['WikiCS', 'Amazon_Computers', 'Amazon_Photos', 'Coauthor_CS', 'Cora']

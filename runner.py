@@ -7,12 +7,12 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 from datasets import load_dataset
 from models.loss import CosineSimilarityLoss
-from models.encoder import GNNEncoder
+from models.encoder import GCN_Encoder
 from models.model import BGRL
 from models.linearpredictor import LinearPredictor
 from utils import augment_graph, print_memory_usage
 import args as default_args
-
+import os
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train and evaluate a BGRL model.')
@@ -27,11 +27,10 @@ def parse_args():
     parser.add_argument('--pe_view_2', type=float, default=default_args.pe_view_2, help='Probability of edge perturbation for the second view (default: 0.4)')
     parser.add_argument('--dataset', type=str, choices=default_args.datasets, default=default_args.default_dataset, help='Dataset to use (default: Coauthor_CS)')
     parser.add_argument('--optimizer', type=str, choices=['adam', 'sgd'], default=default_args.optimizer, help='Optimizer to use (default: adam)')
-    parser.add_argument('--encoder_type', type=str, choices=['GCN', 'GAT', 'MPNN'], default=default_args.encoder_type, help='GNN Architecture (default: GCN)')
     parser.add_argument('--lr', type=float, default=default_args.lr, help='Learning Rate (default: 1e-5)')
-    parser.add_argument('--batch_norm', default=default_args.batch_norm, help='Use Batch Normalization (default: False)')
-    parser.add_argument('--layer_norm', default=default_args.layer_norm, help='Use Layer Normalization (default: False)')
-
+    parser.add_argument('--batch_norm', action='store_true', default=default_args.batch_norm, help='Use Batch Normalization (default: False)')
+    parser.add_argument('--layer_norm', action='store_true', default=default_args.layer_norm, help='Use Layer Normalization (default: False)')
+    parser.add_argument('--save_weights', action='store_true',default=default_args.save_weights, help='Save the model weights after training (default: False)')
     return parser.parse_args()
 
 def main():
@@ -43,7 +42,7 @@ def main():
     data = load_dataset(args.dataset).to(device)
     input_dim = data.x.size(1)
 
-    gnn_encoder = GNNEncoder(input_dim, args.hidden_dim_encoder, args.g_embedding_dim, args.encoder_type, args.batch_norm, args.layer_norm)
+    gnn_encoder = GCN_Encoder(input_dim, args.hidden_dim_encoder, args.g_embedding_dim, args.batch_norm, args.layer_norm)
     predictor = LinearPredictor(args.g_embedding_dim, args.hidden_dim_predictor, args.g_embedding_dim)
     model = BGRL(gnn_encoder, predictor).to(device)
 
@@ -71,6 +70,12 @@ def main():
 
         if (epoch + 1) % 10 == 0:
             print(f"Epoch {epoch + 1}/{args.num_epochs}, Loss: {loss.item()}")
+
+    # Save the model weights if the flag is set
+    if args.save_weights:
+        os.makedirs('weights', exist_ok=True)
+        torch.save(model.state_dict(), os.path.join('weights', 'model_weights.pth'))
+        print("Model weights saved.")
 
     # Model Evaluation
     model.eval()
