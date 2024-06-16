@@ -11,7 +11,6 @@ This project provides an implementation of the [Bootstrapped Graph Latents (BGRL
     ```
 
 2. **Install dependencies**:
-    Ensure you have Python 3.7+ installed. Then, run:
     ```sh
     pip install -r requirements.txt
     ```
