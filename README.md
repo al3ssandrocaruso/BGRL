@@ -19,10 +19,10 @@ This project provides an implementation of the [Bootstrapped Graph Latents (BGRL
 ### Available Datasets
 
 - WikiCS
-- Amazon Computers
-- Amazon Photos
-- Coauthor CS
-- Coauthor Physics
+- Amazon_Computers
+- Amazon_Photos
+- Coauthor_CS
+- Coauthor_Physics
 - Cora
 
 ### Running the Script
