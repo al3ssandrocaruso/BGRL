@@ -71,7 +71,6 @@ def main():
         if (epoch + 1) % 10 == 0:
             print(f"Epoch {epoch + 1}/{args.num_epochs}, Loss: {loss.item()}")
 
-    # Save the model weights if the flag is set
     if args.save_weights:
         os.makedirs('weights', exist_ok=True)
         torch.save(model.state_dict(), os.path.join('weights', 'model_weights.pth'))
