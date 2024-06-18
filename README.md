@@ -47,7 +47,7 @@ This project provides an implementation of the [Bootstrapped Graph Latents (BGRL
 - `--pf_view_2`: Probability of feature perturbation for the second view (default: 0.2)
 - `--pe_view_1`: Probability of edge perturbation for the first view (default: 0.3)
 - `--pe_view_2`: Probability of edge perturbation for the second view (default: 0.4)
-- `--dataset`: Dataset to use (default: Coauthor_CS)
+- `--dataset`: Dataset to use (default: Amazon_Photos)
 - `--optimizer`: Optimizer to use (`adam` or `sgd`, default: `adam`)
 - `--lr`: Learning rate (default: 1e-5)
 - `--use_batch_norm`: Use batch normalization (default: False)
