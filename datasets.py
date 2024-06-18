@@ -1,6 +1,7 @@
 import torch
-from torch_geometric.datasets import WikiCS, Coauthor, Amazon, CitationFull
 from sklearn.preprocessing import StandardScaler
+from config import dataset_mapping
+
 
 def load_dataset(name):
     """
@@ -17,15 +18,6 @@ def load_dataset(name):
     Raises:
     - ValueError: If the dataset name is not supported.
     """
-
-    dataset_mapping = {
-        'Amazon_Computers': (Amazon, 'computers'),
-        'Amazon_Photos': (Amazon, 'photo'),
-        'Coauthor_CS': (Coauthor, 'CS'),
-        'Coauthor_Physics': (Coauthor, 'Physics'),
-        'Cora': (CitationFull, 'Cora'),
-        'WikiCS': (WikiCS, None)
-    }
 
     if name not in dataset_mapping:
         raise ValueError(f"Dataset {name} is not supported. Please choose from {list(dataset_mapping.keys())}.")

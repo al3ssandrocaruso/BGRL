@@ -11,7 +11,7 @@ from models.encoder import GCN_Encoder
 from models.model import BGRL
 from models.linearpredictor import LinearPredictor
 from utils import augment_graph, print_memory_usage
-import args as default_args
+import config as default_args
 import os
 
 def parse_args():
